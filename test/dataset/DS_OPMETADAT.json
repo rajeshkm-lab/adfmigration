@@ -1,0 +1,147 @@
+{
+	"name": "DS_OPMETADAT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_OPMETADAT",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "sqloutput"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "EmployeeKey",
+				"type": "INT32"
+			},
+			{
+				"name": "ParentEmployeeKey",
+				"type": "INT32"
+			},
+			{
+				"name": "EmployeeNationalIDAlternateKey",
+				"type": "UTF8"
+			},
+			{
+				"name": "ParentEmployeeNationalIDAlternateKey",
+				"type": "UTF8"
+			},
+			{
+				"name": "SalesTerritoryKey",
+				"type": "INT32"
+			},
+			{
+				"name": "FirstName",
+				"type": "UTF8"
+			},
+			{
+				"name": "LastName",
+				"type": "UTF8"
+			},
+			{
+				"name": "MiddleName",
+				"type": "UTF8"
+			},
+			{
+				"name": "NameStyle",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "Title",
+				"type": "UTF8"
+			},
+			{
+				"name": "HireDate",
+				"type": "DATE"
+			},
+			{
+				"name": "BirthDate",
+				"type": "DATE"
+			},
+			{
+				"name": "LoginID",
+				"type": "UTF8"
+			},
+			{
+				"name": "EmailAddress",
+				"type": "UTF8"
+			},
+			{
+				"name": "Phone",
+				"type": "UTF8"
+			},
+			{
+				"name": "MaritalStatus",
+				"type": "UTF8"
+			},
+			{
+				"name": "EmergencyContactName",
+				"type": "UTF8"
+			},
+			{
+				"name": "EmergencyContactPhone",
+				"type": "UTF8"
+			},
+			{
+				"name": "SalariedFlag",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "Gender",
+				"type": "UTF8"
+			},
+			{
+				"name": "PayFrequency",
+				"type": "INT32"
+			},
+			{
+				"name": "BaseRate",
+				"type": "DECIMAL",
+				"precision": 19,
+				"scale": 4
+			},
+			{
+				"name": "VacationHours",
+				"type": "INT32"
+			},
+			{
+				"name": "SickLeaveHours",
+				"type": "INT32"
+			},
+			{
+				"name": "CurrentFlag",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "SalesPersonFlag",
+				"type": "BOOLEAN"
+			},
+			{
+				"name": "DepartmentName",
+				"type": "UTF8"
+			},
+			{
+				"name": "StartDate",
+				"type": "DATE"
+			},
+			{
+				"name": "EndDate",
+				"type": "DATE"
+			},
+			{
+				"name": "Status",
+				"type": "UTF8"
+			},
+			{
+				"name": "EmployeePhoto",
+				"type": "BINARY"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,81 @@
+{
+	"name": "DS_LOOKUPCSV",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_LOOKUPCSV",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "googleplaystore.csv",
+				"fileSystem": "test"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Prop_0",
+				"type": "String"
+			},
+			{
+				"name": "App",
+				"type": "String"
+			},
+			{
+				"name": "Category",
+				"type": "String"
+			},
+			{
+				"name": "Rating",
+				"type": "String"
+			},
+			{
+				"name": "Reviews",
+				"type": "String"
+			},
+			{
+				"name": "Size",
+				"type": "String"
+			},
+			{
+				"name": "Installs",
+				"type": "String"
+			},
+			{
+				"name": "Type",
+				"type": "String"
+			},
+			{
+				"name": "Price",
+				"type": "String"
+			},
+			{
+				"name": "Content Rating",
+				"type": "String"
+			},
+			{
+				"name": "Genres",
+				"type": "String"
+			},
+			{
+				"name": "Last Updated",
+				"type": "String"
+			},
+			{
+				"name": "Current Ver",
+				"type": "String"
+			},
+			{
+				"name": "Android Ver",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

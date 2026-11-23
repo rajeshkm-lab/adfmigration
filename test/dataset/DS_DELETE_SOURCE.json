@@ -1,0 +1,19 @@
+{
+	"name": "DS_DELETE_SOURCE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_DELETE_SOURCE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "adf.txt",
+				"fileSystem": "sample"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
