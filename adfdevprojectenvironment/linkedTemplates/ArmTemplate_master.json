@@ -15,6 +15,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'DS_SQLSERVER_ADLS'"
 		},
+		"LS_CSV_PARQUET_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_CSV_PARQUET'"
+		},
 		"LS_DELETE_SOURCE_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_DELETE_SOURCE'"
@@ -47,6 +51,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_OPMETADAT'"
 		},
+		"LS_PARQUET_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_PARQUET'"
+		},
 		"LS_SINK_PARQUET_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_SINK_PARQUET'"
@@ -58,14 +66,6 @@
 		"lS_SOURCE_CSV_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'lS_SOURCE_CSV'"
-		},
-		"LS_CSV_PARQUET_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_CSV_PARQUET'"
-		},
-		"LS_PARQUET_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_PARQUET'"
 		},
 		"DS_SQLSERVER_properties_typeProperties_server": {
 			"type": "string",
@@ -82,6 +82,10 @@
 		"DS_SQLSERVER_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsprojectsink.dfs.core.windows.net/"
+		},
+		"LS_CSV_PARQUET_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsscheduleeventtrigger.dfs.core.windows.net/"
 		},
 		"LS_DELETE_SOURCE_properties_typeProperties_url": {
 			"type": "string",
@@ -115,6 +119,10 @@
 			"type": "string",
 			"defaultValue": "https://adlsprojectsink.dfs.core.windows.net/"
 		},
+		"LS_PARQUET_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://opscheduleeventtrigger.dfs.core.windows.net/"
+		},
 		"LS_SINK_PARQUET_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsprojectsink.dfs.core.windows.net/"
@@ -134,14 +142,6 @@
 		"lS_SOURCE_CSV_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsprojectsource.dfs.core.windows.net/"
-		},
-		"LS_CSV_PARQUET_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlsscheduleeventtrigger.dfs.core.windows.net/"
-		},
-		"LS_PARQUET_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://opscheduleeventtrigger.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -173,6 +173,9 @@
 					"DS_SQLSERVER_ADLS_accountKey": {
 						"value": "[parameters('DS_SQLSERVER_ADLS_accountKey')]"
 					},
+					"LS_CSV_PARQUET_accountKey": {
+						"value": "[parameters('LS_CSV_PARQUET_accountKey')]"
+					},
 					"LS_DELETE_SOURCE_accountKey": {
 						"value": "[parameters('LS_DELETE_SOURCE_accountKey')]"
 					},
@@ -197,23 +200,20 @@
 					"LS_OPMETADAT_accountKey": {
 						"value": "[parameters('LS_OPMETADAT_accountKey')]"
 					},
+					"LS_PARQUET_accountKey": {
+						"value": "[parameters('LS_PARQUET_accountKey')]"
+					},
 					"LS_SINK_PARQUET_accountKey": {
 						"value": "[parameters('LS_SINK_PARQUET_accountKey')]"
 					},
 					"lS_SOURCE_CSV_accountKey": {
 						"value": "[parameters('lS_SOURCE_CSV_accountKey')]"
 					},
-					"LS_CSV_PARQUET_accountKey": {
-						"value": "[parameters('LS_CSV_PARQUET_accountKey')]"
-					},
-					"LS_PARQUET_accountKey": {
-						"value": "[parameters('LS_PARQUET_accountKey')]"
-					},
-					"DS_SQLSERVER_password": {
-						"value": "[parameters('DS_SQLSERVER_password')]"
-					},
 					"DS_SQLSERVER_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('DS_SQLSERVER_ADLS_properties_typeProperties_url')]"
+					},
+					"LS_CSV_PARQUET_properties_typeProperties_url": {
+						"value": "[parameters('LS_CSV_PARQUET_properties_typeProperties_url')]"
 					},
 					"LS_DELETE_SOURCE_properties_typeProperties_url": {
 						"value": "[parameters('LS_DELETE_SOURCE_properties_typeProperties_url')]"
@@ -239,26 +239,14 @@
 					"LS_OPMETADAT_properties_typeProperties_url": {
 						"value": "[parameters('LS_OPMETADAT_properties_typeProperties_url')]"
 					},
+					"LS_PARQUET_properties_typeProperties_url": {
+						"value": "[parameters('LS_PARQUET_properties_typeProperties_url')]"
+					},
 					"LS_SINK_PARQUET_properties_typeProperties_url": {
 						"value": "[parameters('LS_SINK_PARQUET_properties_typeProperties_url')]"
 					},
 					"lS_SOURCE_CSV_properties_typeProperties_url": {
 						"value": "[parameters('lS_SOURCE_CSV_properties_typeProperties_url')]"
-					},
-					"LS_CSV_PARQUET_properties_typeProperties_url": {
-						"value": "[parameters('LS_CSV_PARQUET_properties_typeProperties_url')]"
-					},
-					"LS_PARQUET_properties_typeProperties_url": {
-						"value": "[parameters('LS_PARQUET_properties_typeProperties_url')]"
-					},
-					"DS_SQLSERVER_properties_typeProperties_server": {
-						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_server')]"
-					},
-					"DS_SQLSERVER_properties_typeProperties_database": {
-						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_database')]"
-					},
-					"DS_SQLSERVER_properties_typeProperties_userName": {
-						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -278,8 +266,20 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"DS_SQLSERVER_password": {
+						"value": "[parameters('DS_SQLSERVER_password')]"
+					},
 					"LS_SQLSERVER_DB_password": {
 						"value": "[parameters('LS_SQLSERVER_DB_password')]"
+					},
+					"DS_SQLSERVER_properties_typeProperties_server": {
+						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_server')]"
+					},
+					"DS_SQLSERVER_properties_typeProperties_database": {
+						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_database')]"
+					},
+					"DS_SQLSERVER_properties_typeProperties_userName": {
+						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_userName')]"
 					},
 					"LS_SQLSERVER_DB_properties_typeProperties_server": {
 						"value": "[parameters('LS_SQLSERVER_DB_properties_typeProperties_server')]"
