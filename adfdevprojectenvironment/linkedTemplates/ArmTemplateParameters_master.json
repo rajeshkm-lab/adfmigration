@@ -1,0 +1,117 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "adfdevprojectenvironment"
+		},
+		"DS_SQLSERVER_password": {
+			"value": ""
+		},
+		"DS_SQLSERVER_ADLS_accountKey": {
+			"value": ""
+		},
+		"LS_DELETE_SOURCE_accountKey": {
+			"value": ""
+		},
+		"LS_LOOKUPCSV_accountKey": {
+			"value": ""
+		},
+		"LS_LOOKUPEXCEL_accountKey": {
+			"value": ""
+		},
+		"LS_METADATA_accountKey": {
+			"value": ""
+		},
+		"LS_METADATACOPY_accountKey": {
+			"value": ""
+		},
+		"LS_MULTIPLE_CSV_accountKey": {
+			"value": ""
+		},
+		"LS_MULTIPLE_PARQUET_accountKey": {
+			"value": ""
+		},
+		"LS_OPMETADAT_accountKey": {
+			"value": ""
+		},
+		"LS_SINK_PARQUET_accountKey": {
+			"value": ""
+		},
+		"LS_SQLSERVER_DB_password": {
+			"value": ""
+		},
+		"lS_SOURCE_CSV_accountKey": {
+			"value": ""
+		},
+		"LS_CSV_PARQUET_accountKey": {
+			"value": ""
+		},
+		"LS_PARQUET_accountKey": {
+			"value": ""
+		},
+		"DS_SQLSERVER_properties_typeProperties_server": {
+			"value": "Rajesh\\SQLEXPRESS"
+		},
+		"DS_SQLSERVER_properties_typeProperties_database": {
+			"value": "AdventureWorksDW2025"
+		},
+		"DS_SQLSERVER_properties_typeProperties_userName": {
+			"value": "rajesh"
+		},
+		"DS_SQLSERVER_ADLS_properties_typeProperties_url": {
+			"value": "https://adlsprojectsink.dfs.core.windows.net/"
+		},
+		"LS_DELETE_SOURCE_properties_typeProperties_url": {
+			"value": "https://adlsprojectsource.dfs.core.windows.net/"
+		},
+		"LS_LOOKUPCSV_properties_typeProperties_url": {
+			"value": "https://adlsprojectsource.dfs.core.windows.net/"
+		},
+		"LS_LOOKUPEXCEL_properties_typeProperties_url": {
+			"value": "https://adlsprojectsource.dfs.core.windows.net/"
+		},
+		"LS_METADATA_properties_typeProperties_url": {
+			"value": "https://adlsprojectsource.dfs.core.windows.net/"
+		},
+		"LS_METADATACOPY_properties_typeProperties_url": {
+			"value": "https://adlsprojectsource.dfs.core.windows.net/"
+		},
+		"LS_MULTIPLE_CSV_properties_typeProperties_url": {
+			"value": "https://adlsprojectsource.dfs.core.windows.net/"
+		},
+		"LS_MULTIPLE_PARQUET_properties_typeProperties_url": {
+			"value": "https://adlsprojectsink.dfs.core.windows.net/"
+		},
+		"LS_OPMETADAT_properties_typeProperties_url": {
+			"value": "https://adlsprojectsink.dfs.core.windows.net/"
+		},
+		"LS_SINK_PARQUET_properties_typeProperties_url": {
+			"value": "https://adlsprojectsink.dfs.core.windows.net/"
+		},
+		"LS_SQLSERVER_DB_properties_typeProperties_server": {
+			"value": "RAJESH\\SQLEXPRESS"
+		},
+		"LS_SQLSERVER_DB_properties_typeProperties_database": {
+			"value": "AdventureWorksDW2025"
+		},
+		"LS_SQLSERVER_DB_properties_typeProperties_userName": {
+			"value": "rajesh"
+		},
+		"lS_SOURCE_CSV_properties_typeProperties_url": {
+			"value": "https://adlsprojectsource.dfs.core.windows.net/"
+		},
+		"LS_CSV_PARQUET_properties_typeProperties_url": {
+			"value": "https://adlsscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"LS_PARQUET_properties_typeProperties_url": {
+			"value": "https://opscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
