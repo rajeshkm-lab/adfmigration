@@ -2,15 +2,8 @@
 	"name": "EVENT_CSV_PARQUET",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
-		"pipelines": [
-			{
-				"pipelineReference": {
-					"referenceName": "PL_EVENTTRIGGER",
-					"type": "PipelineReference"
-				}
-			}
-		],
+		"runtimeState": "Stopped",
+		"pipelines": [],
 		"type": "BlobEventsTrigger",
 		"typeProperties": {
 			"blobPathBeginsWith": "/eventcontainer/blobs/",
