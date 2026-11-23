@@ -2,7 +2,7 @@
 	"name": "EVENT_CSV_PARQUET",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
