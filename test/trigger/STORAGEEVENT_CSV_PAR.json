@@ -1,0 +1,24 @@
+{
+	"name": "STORAGEEVENT_CSV_PAR",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "PL_STORAGEEVENT",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/eventcontainer/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/d1c92860-e381-4dc4-8277-548b37199229/resourceGroups/adfresourcegroup/providers/Microsoft.Storage/storageAccounts/adlsscheduleeventtrigger",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}
