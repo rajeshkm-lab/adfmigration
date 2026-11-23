@@ -38,12 +38,187 @@
 		"LS_SQLSERVER_DB_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "rajesh"
+		},
+		"EVENT_CSV_PARQUET_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/d1c92860-e381-4dc4-8277-548b37199229/resourceGroups/adfresourcegroup/providers/Microsoft.Storage/storageAccounts/adlsscheduleeventtrigger"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_OPMETADAT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_OPMETADAT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "sqloutput"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "EmployeeKey",
+						"type": "INT32"
+					},
+					{
+						"name": "ParentEmployeeKey",
+						"type": "INT32"
+					},
+					{
+						"name": "EmployeeNationalIDAlternateKey",
+						"type": "UTF8"
+					},
+					{
+						"name": "ParentEmployeeNationalIDAlternateKey",
+						"type": "UTF8"
+					},
+					{
+						"name": "SalesTerritoryKey",
+						"type": "INT32"
+					},
+					{
+						"name": "FirstName",
+						"type": "UTF8"
+					},
+					{
+						"name": "LastName",
+						"type": "UTF8"
+					},
+					{
+						"name": "MiddleName",
+						"type": "UTF8"
+					},
+					{
+						"name": "NameStyle",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "Title",
+						"type": "UTF8"
+					},
+					{
+						"name": "HireDate",
+						"type": "DATE"
+					},
+					{
+						"name": "BirthDate",
+						"type": "DATE"
+					},
+					{
+						"name": "LoginID",
+						"type": "UTF8"
+					},
+					{
+						"name": "EmailAddress",
+						"type": "UTF8"
+					},
+					{
+						"name": "Phone",
+						"type": "UTF8"
+					},
+					{
+						"name": "MaritalStatus",
+						"type": "UTF8"
+					},
+					{
+						"name": "EmergencyContactName",
+						"type": "UTF8"
+					},
+					{
+						"name": "EmergencyContactPhone",
+						"type": "UTF8"
+					},
+					{
+						"name": "SalariedFlag",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "Gender",
+						"type": "UTF8"
+					},
+					{
+						"name": "PayFrequency",
+						"type": "INT32"
+					},
+					{
+						"name": "BaseRate",
+						"type": "DECIMAL",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "VacationHours",
+						"type": "INT32"
+					},
+					{
+						"name": "SickLeaveHours",
+						"type": "INT32"
+					},
+					{
+						"name": "CurrentFlag",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "SalesPersonFlag",
+						"type": "BOOLEAN"
+					},
+					{
+						"name": "DepartmentName",
+						"type": "UTF8"
+					},
+					{
+						"name": "StartDate",
+						"type": "DATE"
+					},
+					{
+						"name": "EndDate",
+						"type": "DATE"
+					},
+					{
+						"name": "Status",
+						"type": "UTF8"
+					},
+					{
+						"name": "EmployeePhoto",
+						"type": "BINARY"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_PARQUET')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_PARQUET",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "outputcontainer"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -122,6 +297,53 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/DS_EVENTCSV')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_EVENTCSV",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "eventcontainer"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DS_EVENTPARQUET')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "LS_EVENTPARQUET",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "eventoutputcontainer"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_COPYCSV_ADLS_PARQUET_SCHEDULETRIGGER')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -192,7 +414,9 @@
 				},
 				"annotations": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_PARQUET')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/PL_DELETE_SOURCE')]",
@@ -346,7 +570,8 @@
 				"lastPublishTime": "2026-11-18T10:16:27Z"
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]"
+				"[concat(variables('factoryId'), '/datasets/DelimitedText1')]",
+				"[concat(variables('factoryId'), '/datasets/DS_OPMETADAT')]"
 			]
 		},
 		{
@@ -448,6 +673,82 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_EVENTTRIGGER')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_EVENTCSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DS_EVENTPARQUET",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/DS_EVENTCSV')]",
+				"[concat(variables('factoryId'), '/datasets/DS_EVENTPARQUET')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/SCH_TRIGGER_CSV_PARQUET')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -475,6 +776,36 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/PL_COPYCSV_ADLS_PARQUET_SCHEDULETRIGGER')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EVENT_CSV_PARQUET')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_EVENTTRIGGER",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/eventcontainer/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('EVENT_CSV_PARQUET_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_EVENTTRIGGER')]"
 			]
 		}
 	]

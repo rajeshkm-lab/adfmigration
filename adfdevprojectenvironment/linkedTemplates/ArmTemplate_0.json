@@ -59,6 +59,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'lS_SOURCE_CSV'"
 		},
+		"LS_EVENTCSV_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_EVENTCSV'"
+		},
+		"LS_EVENTPARQUET_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_EVENTPARQUET'"
+		},
 		"DS_SQLSERVER_ADLS_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsprojectsink.dfs.core.windows.net/"
@@ -110,6 +118,14 @@
 		"lS_SOURCE_CSV_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsprojectsource.dfs.core.windows.net/"
+		},
+		"LS_EVENTCSV_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"LS_EVENTPARQUET_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://opscheduleeventtrigger.dfs.core.windows.net/"
 		}
 	},
 	"variables": {
@@ -350,6 +366,40 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/LS_EVENTCSV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_EVENTCSV_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_EVENTCSV_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_EVENTPARQUET')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_EVENTPARQUET_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_EVENTPARQUET_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_CSV_PARQUET')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -527,181 +577,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/LS_METADATACOPY')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_OPMETADAT')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_OPMETADAT",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "sqloutput"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": [
-					{
-						"name": "EmployeeKey",
-						"type": "INT32"
-					},
-					{
-						"name": "ParentEmployeeKey",
-						"type": "INT32"
-					},
-					{
-						"name": "EmployeeNationalIDAlternateKey",
-						"type": "UTF8"
-					},
-					{
-						"name": "ParentEmployeeNationalIDAlternateKey",
-						"type": "UTF8"
-					},
-					{
-						"name": "SalesTerritoryKey",
-						"type": "INT32"
-					},
-					{
-						"name": "FirstName",
-						"type": "UTF8"
-					},
-					{
-						"name": "LastName",
-						"type": "UTF8"
-					},
-					{
-						"name": "MiddleName",
-						"type": "UTF8"
-					},
-					{
-						"name": "NameStyle",
-						"type": "BOOLEAN"
-					},
-					{
-						"name": "Title",
-						"type": "UTF8"
-					},
-					{
-						"name": "HireDate",
-						"type": "DATE"
-					},
-					{
-						"name": "BirthDate",
-						"type": "DATE"
-					},
-					{
-						"name": "LoginID",
-						"type": "UTF8"
-					},
-					{
-						"name": "EmailAddress",
-						"type": "UTF8"
-					},
-					{
-						"name": "Phone",
-						"type": "UTF8"
-					},
-					{
-						"name": "MaritalStatus",
-						"type": "UTF8"
-					},
-					{
-						"name": "EmergencyContactName",
-						"type": "UTF8"
-					},
-					{
-						"name": "EmergencyContactPhone",
-						"type": "UTF8"
-					},
-					{
-						"name": "SalariedFlag",
-						"type": "BOOLEAN"
-					},
-					{
-						"name": "Gender",
-						"type": "UTF8"
-					},
-					{
-						"name": "PayFrequency",
-						"type": "INT32"
-					},
-					{
-						"name": "BaseRate",
-						"type": "DECIMAL",
-						"precision": 19,
-						"scale": 4
-					},
-					{
-						"name": "VacationHours",
-						"type": "INT32"
-					},
-					{
-						"name": "SickLeaveHours",
-						"type": "INT32"
-					},
-					{
-						"name": "CurrentFlag",
-						"type": "BOOLEAN"
-					},
-					{
-						"name": "SalesPersonFlag",
-						"type": "BOOLEAN"
-					},
-					{
-						"name": "DepartmentName",
-						"type": "UTF8"
-					},
-					{
-						"name": "StartDate",
-						"type": "DATE"
-					},
-					{
-						"name": "EndDate",
-						"type": "DATE"
-					},
-					{
-						"name": "Status",
-						"type": "UTF8"
-					},
-					{
-						"name": "EmployeePhoto",
-						"type": "BINARY"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_OPMETADAT')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/DS_PARQUET')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "LS_PARQUET",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Parquet",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobFSLocation",
-						"fileSystem": "outputcontainer"
-					},
-					"compressionCodec": "snappy"
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_PARQUET')]"
 			]
 		}
 	]

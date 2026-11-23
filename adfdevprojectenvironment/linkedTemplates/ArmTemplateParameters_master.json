@@ -50,6 +50,12 @@
 		"lS_SOURCE_CSV_accountKey": {
 			"value": ""
 		},
+		"LS_EVENTCSV_accountKey": {
+			"value": ""
+		},
+		"LS_EVENTPARQUET_accountKey": {
+			"value": ""
+		},
 		"DS_SQLSERVER_properties_typeProperties_server": {
 			"value": "Rajesh\\SQLEXPRESS"
 		},
@@ -106,6 +112,15 @@
 		},
 		"lS_SOURCE_CSV_properties_typeProperties_url": {
 			"value": "https://adlsprojectsource.dfs.core.windows.net/"
+		},
+		"LS_EVENTCSV_properties_typeProperties_url": {
+			"value": "https://adlsscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"LS_EVENTPARQUET_properties_typeProperties_url": {
+			"value": "https://opscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"EVENT_CSV_PARQUET_properties_typeProperties_scope": {
+			"value": "/subscriptions/d1c92860-e381-4dc4-8277-548b37199229/resourceGroups/adfresourcegroup/providers/Microsoft.Storage/storageAccounts/adlsscheduleeventtrigger"
 		},
 		"containerUri": {
 			"value": ""
