@@ -1,0 +1,19 @@
+{
+	"name": "DS_PARQUET_EVENT",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_PARQUET_EVENT",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "eventoutputcontainer"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
