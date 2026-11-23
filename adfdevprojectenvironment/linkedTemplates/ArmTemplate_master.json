@@ -75,6 +75,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_EVENTPARQUET'"
 		},
+		"LS_CSV_EVENT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_CSV_EVENT'"
+		},
+		"LS_PARQUET_EVENT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_PARQUET_EVENT'"
+		},
 		"DS_SQLSERVER_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "Rajesh\\SQLEXPRESS"
@@ -163,6 +171,18 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/d1c92860-e381-4dc4-8277-548b37199229/resourceGroups/adfresourcegroup/providers/Microsoft.Storage/storageAccounts/adlsscheduleeventtrigger"
 		},
+		"LS_CSV_EVENT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"LS_PARQUET_EVENT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://opscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"EVENT_CPY_CSV_PARQUET_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/d1c92860-e381-4dc4-8277-548b37199229/resourceGroups/adfresourcegroup/providers/Microsoft.Storage/storageAccounts/adlsscheduleeventtrigger"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -235,6 +255,12 @@
 					"LS_EVENTPARQUET_accountKey": {
 						"value": "[parameters('LS_EVENTPARQUET_accountKey')]"
 					},
+					"LS_CSV_EVENT_accountKey": {
+						"value": "[parameters('LS_CSV_EVENT_accountKey')]"
+					},
+					"LS_PARQUET_EVENT_accountKey": {
+						"value": "[parameters('LS_PARQUET_EVENT_accountKey')]"
+					},
 					"DS_SQLSERVER_ADLS_properties_typeProperties_url": {
 						"value": "[parameters('DS_SQLSERVER_ADLS_properties_typeProperties_url')]"
 					},
@@ -279,6 +305,15 @@
 					},
 					"LS_EVENTPARQUET_properties_typeProperties_url": {
 						"value": "[parameters('LS_EVENTPARQUET_properties_typeProperties_url')]"
+					},
+					"EVENT_CSV_PARQUET_properties_typeProperties_scope": {
+						"value": "[parameters('EVENT_CSV_PARQUET_properties_typeProperties_scope')]"
+					},
+					"LS_CSV_EVENT_properties_typeProperties_url": {
+						"value": "[parameters('LS_CSV_EVENT_properties_typeProperties_url')]"
+					},
+					"LS_PARQUET_EVENT_properties_typeProperties_url": {
+						"value": "[parameters('LS_PARQUET_EVENT_properties_typeProperties_url')]"
 					}
 				}
 			},
@@ -322,8 +357,8 @@
 					"LS_SQLSERVER_DB_properties_typeProperties_userName": {
 						"value": "[parameters('LS_SQLSERVER_DB_properties_typeProperties_userName')]"
 					},
-					"EVENT_CSV_PARQUET_properties_typeProperties_scope": {
-						"value": "[parameters('EVENT_CSV_PARQUET_properties_typeProperties_scope')]"
+					"EVENT_CPY_CSV_PARQUET_properties_typeProperties_scope": {
+						"value": "[parameters('EVENT_CPY_CSV_PARQUET_properties_typeProperties_scope')]"
 					}
 				}
 			},

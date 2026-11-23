@@ -56,6 +56,12 @@
 		"LS_EVENTPARQUET_accountKey": {
 			"value": ""
 		},
+		"LS_CSV_EVENT_accountKey": {
+			"value": ""
+		},
+		"LS_PARQUET_EVENT_accountKey": {
+			"value": ""
+		},
 		"DS_SQLSERVER_properties_typeProperties_server": {
 			"value": "Rajesh\\SQLEXPRESS"
 		},
@@ -120,6 +126,15 @@
 			"value": "https://opscheduleeventtrigger.dfs.core.windows.net/"
 		},
 		"EVENT_CSV_PARQUET_properties_typeProperties_scope": {
+			"value": "/subscriptions/d1c92860-e381-4dc4-8277-548b37199229/resourceGroups/adfresourcegroup/providers/Microsoft.Storage/storageAccounts/adlsscheduleeventtrigger"
+		},
+		"LS_CSV_EVENT_properties_typeProperties_url": {
+			"value": "https://adlsscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"LS_PARQUET_EVENT_properties_typeProperties_url": {
+			"value": "https://opscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"EVENT_CPY_CSV_PARQUET_properties_typeProperties_scope": {
 			"value": "/subscriptions/d1c92860-e381-4dc4-8277-548b37199229/resourceGroups/adfresourcegroup/providers/Microsoft.Storage/storageAccounts/adlsscheduleeventtrigger"
 		}
 	}

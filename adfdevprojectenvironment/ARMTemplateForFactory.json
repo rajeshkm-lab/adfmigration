@@ -75,6 +75,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_EVENTPARQUET'"
 		},
+		"LS_CSV_EVENT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_CSV_EVENT'"
+		},
+		"LS_PARQUET_EVENT_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_PARQUET_EVENT'"
+		},
 		"DS_SQLSERVER_properties_typeProperties_server": {
 			"type": "string",
 			"defaultValue": "Rajesh\\SQLEXPRESS"
@@ -160,6 +168,18 @@
 			"defaultValue": "https://opscheduleeventtrigger.dfs.core.windows.net/"
 		},
 		"EVENT_CSV_PARQUET_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/d1c92860-e381-4dc4-8277-548b37199229/resourceGroups/adfresourcegroup/providers/Microsoft.Storage/storageAccounts/adlsscheduleeventtrigger"
+		},
+		"LS_CSV_EVENT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"LS_PARQUET_EVENT_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://opscheduleeventtrigger.dfs.core.windows.net/"
+		},
+		"EVENT_CPY_CSV_PARQUET_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/d1c92860-e381-4dc4-8277-548b37199229/resourceGroups/adfresourcegroup/providers/Microsoft.Storage/storageAccounts/adlsscheduleeventtrigger"
 		}
@@ -1206,7 +1226,61 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_EVENTTRIGGER')]",
+			"name": "[concat(parameters('factoryName'), '/LS_EVENTCSV')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_EVENTCSV_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_EVENTCSV_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_EVENTPARQUET')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_EVENTPARQUET_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_EVENTPARQUET_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/EVENT_CSV_PARQUET')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Stopped",
+				"pipelines": [],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/eventcontainer/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('EVENT_CSV_PARQUET_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_EVENT')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1257,14 +1331,14 @@
 						},
 						"inputs": [
 							{
-								"referenceName": "DS_EVENTCSV",
+								"referenceName": "DS_CSV_EVENT",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
 						],
 						"outputs": [
 							{
-								"referenceName": "DS_EVENTPARQUET",
+								"referenceName": "DS_PARQUET_EVENT",
 								"type": "DatasetReference",
 								"parameters": {}
 							}
@@ -1277,34 +1351,34 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_EVENTCSV')]",
-				"[concat(variables('factoryId'), '/datasets/DS_EVENTPARQUET')]"
+				"[concat(variables('factoryId'), '/datasets/DS_CSV_EVENT')]",
+				"[concat(variables('factoryId'), '/datasets/DS_PARQUET_EVENT')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_EVENTCSV')]",
+			"name": "[concat(parameters('factoryName'), '/LS_CSV_EVENT')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('LS_EVENTCSV_properties_typeProperties_url')]",
+					"url": "[parameters('LS_CSV_EVENT_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('LS_EVENTCSV_accountKey')]"
+						"value": "[parameters('LS_CSV_EVENT_accountKey')]"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_EVENTCSV')]",
+			"name": "[concat(parameters('factoryName'), '/DS_CSV_EVENT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "LS_EVENTCSV",
+					"referenceName": "LS_CSV_EVENT",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -1322,33 +1396,33 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_EVENTCSV')]"
+				"[concat(variables('factoryId'), '/linkedServices/LS_CSV_EVENT')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/LS_EVENTPARQUET')]",
+			"name": "[concat(parameters('factoryName'), '/LS_PARQUET_EVENT')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"type": "AzureBlobFS",
 				"typeProperties": {
-					"url": "[parameters('LS_EVENTPARQUET_properties_typeProperties_url')]",
+					"url": "[parameters('LS_PARQUET_EVENT_properties_typeProperties_url')]",
 					"accountKey": {
 						"type": "SecureString",
-						"value": "[parameters('LS_EVENTPARQUET_accountKey')]"
+						"value": "[parameters('LS_PARQUET_EVENT_accountKey')]"
 					}
 				}
 			},
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/DS_EVENTPARQUET')]",
+			"name": "[concat(parameters('factoryName'), '/DS_PARQUET_EVENT')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "LS_EVENTPARQUET",
+					"referenceName": "LS_PARQUET_EVENT",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
@@ -1363,11 +1437,11 @@
 				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/LS_EVENTPARQUET')]"
+				"[concat(variables('factoryId'), '/linkedServices/LS_PARQUET_EVENT')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/EVENT_CSV_PARQUET')]",
+			"name": "[concat(parameters('factoryName'), '/EVENT_CPY_CSV_PARQUET')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1376,7 +1450,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "PL_EVENTTRIGGER",
+							"referenceName": "PL_EVENT",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -1386,14 +1460,14 @@
 				"typeProperties": {
 					"blobPathBeginsWith": "/eventcontainer/blobs/",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('EVENT_CSV_PARQUET_properties_typeProperties_scope')]",
+					"scope": "[parameters('EVENT_CPY_CSV_PARQUET_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/PL_EVENTTRIGGER')]"
+				"[concat(variables('factoryId'), '/pipelines/PL_EVENT')]"
 			]
 		}
 	]
