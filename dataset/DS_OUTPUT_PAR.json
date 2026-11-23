@@ -1,0 +1,19 @@
+{
+	"name": "DS_OUTPUT_PAR",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_OUTPUT_PAR",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "eventoutputcontainer"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
